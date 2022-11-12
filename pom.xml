@@ -50,7 +50,7 @@
 	</dependencies>
 
 	<build>
-        <finalName>sprecat</finalName>
+        <finalName>${packagingName}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -64,16 +64,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.3.0</version>
-				<configuration>
-					<finalName>${packagingName}</finalName>
-                    <outputDirectory>${packageOutputDirectory}</outputDirectory>
-				</configuration>
-			</plugin>
-            
 		</plugins>
 	</build>
 
@@ -86,7 +76,6 @@
             <properties>
                 <environment>dev</environment>
                 <packagingName>ROOT</packagingName>
-                <packageOutputDirectory>${project.basedir}\target</packageOutputDirectory>
             </properties>
         </profile>
         <profile>
@@ -94,7 +83,6 @@
             <properties>
                 <environment>prd</environment>
                 <packagingName>ROOT</packagingName>
-                <packageOutputDirectory>${project.basedir}\target</packageOutputDirectory>
 				<!-- <skipInstallNode>false</skipInstallNode> -->
             </properties>
             <build>
@@ -114,7 +102,7 @@
                                     <goal>install-node-and-yarn</goal>
                                 </goals>
                                 <configuration>
-									<skip>${skipInstallNode}</skip>
+									<!-- <skip>${skipInstallNode}</skip> -->
                                     <nodeVersion>v18.12.1</nodeVersion>
                                     <yarnVersion>v1.22.19</yarnVersion>
                                 </configuration>
@@ -145,7 +133,7 @@
 						<executions>
 							<execution>
 								<id>copy-resources</id>
-								<phase>validate</phase>
+								<phase>generate-resources</phase>
 								<goals>
 									<goal>copy-resources</goal>
 								</goals>
